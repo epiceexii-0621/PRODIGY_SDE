@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess the Number Game</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .game-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        input {
+            padding: 10px;
+            width: 80%;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #feedback {
+            font-size: 18px;
+            margin-top: 10px;
+        }
+
+        #attempts {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="game-container">
+        <h2>Guess the Number Game</h2>
+        <p>We have selected a random number between 1 and 100. Try to guess it!</p>
+
+        <label for="userGuess">Enter your guess:</label>
+        <input type="number" id="userGuess" placeholder="Your guess here" min="1" max="100">
+
+        <button onclick="checkGuess()">Submit Guess</button>
+
+        <p id="feedback"></p>
+        <p id="attempts"></p>
+    </div>
+
+    <script>
+        // Generate a random number between 1 and 100
+        var randomNumber = Math.floor(Math.random() * 100) + 1;
+        var attempts = 0;
+
+        function checkGuess() {
+            var userGuess = parseInt(document.getElementById('userGuess').value);
+            var feedback = document.getElementById('feedback');
+            var attemptsDisplay = document.getElementById('attempts');
+            attempts++;
+
+            if (userGuess < randomNumber) {
+                feedback.textContent = "Your guess is too low. Try again!";
+                feedback.style.color = "#ff6347";
+            } else if (userGuess > randomNumber) {
+                feedback.textContent = "Your guess is too high. Try again!";
+                feedback.style.color = "#ff6347";
+            } else if (userGuess === randomNumber) {
+                feedback.textContent = "Congratulations! You've guessed the correct number!";
+                feedback.style.color = "#4CAF50";
+                attemptsDisplay.textContent = `It took you ${attempts} attempts to guess the number.`;
+            } else {
+                feedback.textContent = "Please enter a valid number!";
+                feedback.style.color = "#ff6347";
+            }
+        }
+    </script>
+</body>
+
+</html>
